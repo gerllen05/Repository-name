@@ -5,10 +5,10 @@ let rec klp a = match a with
 	|Node(num,t1,t2) -> (string_of_int num) ^ (klp t1) ^ (klp t2);;
 let rec lkp a = match a with
 	Leaf -> ""
-	|Node(num,t1,t2) -> (klp t1) ^ (string_of_int num) ^ (klp t2);;
+	|Node(num,t1,t2) -> (lkp t1) ^ (string_of_int num) ^ (lkp t2);;
 let rec lpk a = match a with
 	Leaf -> ""
-	|Node(num,t1,t2) -> (klp t1) ^ (klp t2) ^ (string_of_int num);;
+	|Node(num,t1,t2) -> (lpk t1) ^ (lpk t2) ^ (string_of_int num);;
 print_string ((klp a) ^ " ");;
 print_string ((lkp a) ^ " ");;
 print_string (lpk a);; 

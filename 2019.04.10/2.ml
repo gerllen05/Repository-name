@@ -1,13 +1,11 @@
 type tree = Node of int*tree*tree | Leaf;;
-type tree2 = Node2 of int*int 
 let a = Node(1,Node(2,Leaf,Node(3,Leaf,Leaf)),Node(4,Leaf,Leaf));;
-let rec shir a d = match a with
-	Node(num,t1,t2) -> Node2(num,d)::(shir t1 (d+1))::(shir t2 (d+1));;
-let rec shiri l d = 
-		if d<30 then match l with
-	Node2(num,c)::[] -> if c = d then ((string_of_int num) ^ (shiri l (d+1))) else (shiri l (d+1))
-	|Node2(num,c)::b -> if c = d then ((string_of_int num) ^ (shiri b d)) else (shiri b d)
-	|[] -> [] 
-		else "";;
-print_string (shiri (shir a 0) 0);;
+let rec glub a = match a with
+	Leaf -> 0
+	|Node(num,t1,t2) -> 1 + (max (glub t1) (glub t2));;
+let rec write a m n = match a with
+	Leaf -> ()
+	|Node(num,t1,t2) -> if m <> n then ((write t1 (m+1) n);(write t2 (m+1) n)) else (print_int num;(write t1 (m+1) n);(write t2 (m+1) n));;
+for i = 0 to (glub a) do (write a 0 i) done;;
+
 	

@@ -1,4 +1,6 @@
+(*String*)
 open String;;
+
 type prefix = Ques of prefix*prefix | Ans of int;;
 let a = Ques(Ques(Ans 1,Ans 2),Ques(Ans 3,Ques(Ans 4,Ans 5)));;
 
@@ -14,4 +16,21 @@ let rec zna a s n = match a with
 	|Ans d -> d;;
 
 print_int (zna a (otv a 3 "") 0);;
+(*Int List*)
+open List;;
 
+type prefix = Ques of prefix*prefix | Ans of int;;
+let a = Ques(Ques(Ans 1,Ans 2),Ques(Ans 3,Ques(Ans 4,Ans 5)));;
+
+let rec otv a k l = match a with
+	|Ques(b,c) -> (otv b k (l @ [1])) @ (otv c k (l @ [0]))
+	|Ans d -> if d = k then l else [];;
+
+List.iter (fun x -> print_int x) (otv a 3 []);;
+print_string " ";; 
+
+let rec zna a s = match a with
+	|Ques(b,c) ->  if (hd s) = 1 then (zna b (tl s)) else (zna c (tl s))
+	|Ans d -> d;;
+
+print_int (zna a (otv a 3 []));;

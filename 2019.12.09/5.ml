@@ -9,5 +9,5 @@ let rec trback n o p = if p < 1 then [] else ((n-(n mod p))/p) :: (trback (n mod
 let rec find n o p = if p > n then trback n o (p / o) else find n o (p * o);;
 
 List.iter (fun x -> print_int x;print_string " ") (List.rev (find (trans l o 1) o 1));;
-
+print_string "                ";;
 List.iter (fun x -> print_int x;print_string " ") (List.rev (find 512 o 1));;

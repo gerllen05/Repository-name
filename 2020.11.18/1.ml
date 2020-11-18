@@ -12,7 +12,7 @@ let rec find t k v = match t with
 	
 let rec add t k v =  match t with
 	Leaf -> Node(Leaf,Leaf,(k,v))
-	|Node(a,b,(c,d)) -> if c = k then Node(a,b,(k,v)) else (if c < k then Node(add a k v,b,(c,d)) else Node(a,add b k v,(c,d)));;
+	|Node(a,b,(c,d)) -> if c = k then Node(a,b,(k,v)) else (if c < k then Node(a,add b k v,(c,d)) else Node(add a k v,b,(c,d)));;
 	
 let rec del t k = match t with 
 	Leaf -> Leaf
@@ -36,7 +36,7 @@ let rec string_of_tree l x p = match l with
 		if b = Leaf then print_string "*" else string_of_tree b (x+4) p;;
 
 string_of_tree (add t 4 "Potato") 0 [];;
+print_string "\n\n";;
 string_of_tree (del t 3) 0 [];;
 Printf.printf "\n%b" (mem t 4);;
 Printf.printf "\n%b" (find t 1 "Melon");;
-

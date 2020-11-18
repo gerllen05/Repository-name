@@ -12,7 +12,7 @@ let rec find t k v = match t with
 	
 let rec add t k v =  match t with
 	Leaf -> Node(Leaf,Leaf,(k,v))
-	|Node(a,b,(c,d)) -> if c = k then Node(a,b,(k,v)) else (if c < k then add a k v else add b k v);;
+	|Node(a,b,(c,d)) -> if c = k then Node(a,b,(k,v)) else (if c < k then Node(add a k v,b,(c,d)) else Node(a,add b k v,(c,d)));;
 	
 let rec del t k = match t with 
 	Leaf -> Leaf
